@@ -58,12 +58,29 @@ void Classeurs_treeView::mouseReleaseEvent ( QMouseEvent * event ) {
             menu_middle->popup(this->viewport()->mapToGlobal(event->pos())); }
         else {
             menu_middle->addAction(add);
-            menu_middle->popup(this->viewport()->mapToGlobal(event->pos())); } }
-    if(event->button() == Qt::LeftButton) {
-   //     if (this->indexAt(event->pos()).isValid())
-   //         this->setCurrentIndex(this->indexAt(event->pos()));
-      //  emit clicked(this->indexAt(event->pos()));
-        emit clicked(this->currentIndex());
-    }
+            menu_middle->popup(this->viewport()->mapToGlobal(event->pos())); }
+        if(event->button() == Qt::LeftButton) {
+            QThread::msleep(250);
+            emit clicked(this->currentIndex()); } }
 }
 
+//void Classeurs_treeView::mousePressEvent( QMouseEvent * event ) {
+//    if(event->button() == Qt::LeftButton) {
+//        QModelIndex idx = this->indexAt(event->pos());
+//        int cursor_pos_X = event->pos().rx();
+//        if (idx.isValid()) {
+//            emit clicked(this->currentIndex());
+//            int limit_L = setLimit(idx);
+//            if(cursor_pos_X >= limit_L &&
+//               cursor_pos_X <= limit_L + 21)
+//                this->setExpanded(idx, !(this->isExpanded(idx)));
+//            this->setCurrentIndex(idx); } }
+//}
+
+int Classeurs_treeView::setLimit(QModelIndex index) {
+    int limit(0);
+    if(index.parent().isValid()) {
+        limit += 21 + setLimit(index.parent());
+    }
+    return limit;
+}

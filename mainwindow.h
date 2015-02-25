@@ -8,7 +8,6 @@
 #include <QSqlRecord>
 #include <QStandardItem>
 #include <QAction>
-#include <QMapWidget/QMapWidget>
 
 #include "classeurs_model.h"
 #include "classeur.h"
@@ -52,7 +51,6 @@ private:
     Classeurs_Model          *classeurs_model;
     Files_Model              *files_name;
     QModelIndex               idx_result;
-    QMapWidget               *map;
 };
 
 #endif // MAINWINDOW_H

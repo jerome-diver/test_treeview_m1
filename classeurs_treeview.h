@@ -37,6 +37,7 @@ protected:
     void      delete_row();
     void      add_row();
     void      add_row_child();
+    int       setLimit(QModelIndex index);
 
 protected slots:
     void mouseReleaseEvent ( QMouseEvent * event );

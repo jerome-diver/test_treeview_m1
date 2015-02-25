@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <modeltest.h>
 
 
 
@@ -9,9 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    map = new QMapWidget(this);
-        setCentralWidget(map);
-        map->setFocus();
     qDebug("go");
     QSqlDatabase database =  QSqlDatabase::addDatabase("QPSQL");
     database.setDatabaseName("recorder");
@@ -58,16 +54,12 @@ MainWindow::~MainWindow()
 //********************  initialize:  classeurs  **************************************
 void MainWindow::on_classeurs_clicked(QModelIndex index) {
     if(index.isValid()) {
-        qDebug(Q_FUNC_INFO);
-   //     ui->files->reset();  // RAZ files of the tree table
-   //     QModelIndex   index_Col0 = index.parent().sibling(index.row(),0);
-   //     ui->classeurs->setCurrentIndex(index);
-   //     Classeur     *classeur   = classeurs_model->getClasseur(index_Col0);
-   //     files_name               = classeur->getFiles_model();
-   //     ui->files->setModel(files_name);
-   //     ui->files->setColumnHidden(4,true);
-   //     ui->classeurs->update(index);
-   //     ui->classeurs->setCurrentIndex(index);
+        ui->files->reset();  // RAZ files of the tree table
+        QModelIndex   index_Col0 = index.parent().sibling(index.row(),0);
+        Classeur     *classeur   = classeurs_model->getClasseur(index_Col0);
+        files_name               = classeur->getFiles_model();
+        ui->files->setModel(files_name);
+        ui->files->setColumnHidden(4,true);
     }
 }
 
