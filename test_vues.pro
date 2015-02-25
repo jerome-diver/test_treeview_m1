@@ -20,7 +20,10 @@ SOURCES += main.cpp\
         classeurs_model.cpp \
         files_treeview.cpp \
         files_model.cpp \
-        add_classeur_files.cpp
+        add_classeur_files.cpp \
+     modeltest/modeltest.cpp \
+     modeltest/tst_modeltest.cpp \
+     modeltest/dynamictreemodel.cpp
 
 HEADERS  += mainwindow.h\
         classeur.h \
@@ -28,9 +31,10 @@ HEADERS  += mainwindow.h\
         classeurs_model.h \
         files_treeview.h \
         files_model.h \
-        add_classeur_files.h
+        add_classeur_files.h \
+     modeltest/modeltest.h \
+     modeltest/dynamictreemodel.h
 
 FORMS    += mainwindow.ui \
         add_classeur_files.ui
 
-include(../modeltest/modeltest.pri)

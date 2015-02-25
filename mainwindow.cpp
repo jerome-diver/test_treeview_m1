@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "modeltest.h"
+#include "modeltest/modeltest.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
