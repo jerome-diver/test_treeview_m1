@@ -20,7 +20,8 @@ Classeurs_Model::Classeurs_Model(QObject *parent):
     db_coordonates.table = "Classeurs";
     db_coordonates.linker_table = "ClasseurRef";
     QVector<QVariant> headers;
-    headers << tr("Classeurs") << tr("Description") << tr("id") << tr("id parent") << "ID";
+    headers << tr("Classeurs") << tr("Description")
+            << tr("id") << tr("id parent") << "ID";
     root_classeur = new Classeur(headers);
  //   for(int i(0); i < headers.count(); i++)
  //       setHeaderData(i, Qt::Horizontal, headers[i]);
@@ -43,16 +44,13 @@ QModelIndex Classeurs_Model::parent(const QModelIndex &index) const {
 QModelIndex Classeurs_Model::index(int row,
                                    int column,
                                    const QModelIndex &parent) const {
-    if (parent.isValid() && parent.column() != 0)
+    if (!parent.isValid() && parent.column() != 0)
         return QModelIndex();
-
     Classeur *parentClasseur = getClasseur(parent);
     Classeur *childClasseur = parentClasseur->child(row);
     if (childClasseur)
         return createIndex(row, column, childClasseur);
-    else
-        return QModelIndex();
-
+    return QModelIndex();
 }
 
 QModelIndex Classeurs_Model::indexOf(Classeur *classeur) {
@@ -63,8 +61,6 @@ Qt::ItemFlags  Classeurs_Model::flags(const QModelIndex &index) const {
     if(!index.isValid())
         return 0;
     return Qt::ItemIsEditable |
-           Qt::ItemIsEnabled |
-           Qt::ItemIsSelectable |
            QAbstractItemModel::flags(index);
 }
 
@@ -296,7 +292,8 @@ void Classeurs_Model::find_Childs(int id_parent,
             parent->insertChildren(parent->childCount(), 1);
  //       endInsertRows();
             for (int column = 0; column < 5; ++column)
-                parent->child(parent->childCount() - 1)->setData(column, row[column]);
+                parent->child(parent->childCount() - 1)
+                        ->setData(column, row[column]);
             if(!db_Classeurs.values(id).isEmpty())
                 find_Childs(id, parent->child(parent->childCount() - 1)); } }
 }

@@ -3,11 +3,7 @@
 #include <QMessageBox>
 
 Classeurs_treeView::Classeurs_treeView(QWidget *parent) {
-    this->setAcceptDrops(false);
-    this->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    this->setColumnHidden(2, true);
-    this->setColumnHidden(3, true);
-    this->setColumnHidden(4, true);
+    this->setSelectionMode(QAbstractItemView::SingleSelection);
     supprimer   = new QAction(tr("Supprimer"), this);
     add         = new QAction(tr("Ajoute un classeur"), this);
     addChild    = new QAction(tr("Ajoute un classeur \"enfant\""), this);
@@ -58,24 +54,21 @@ void Classeurs_treeView::mouseReleaseEvent ( QMouseEvent * event ) {
             menu_middle->popup(this->viewport()->mapToGlobal(event->pos())); }
         else {
             menu_middle->addAction(add);
-            menu_middle->popup(this->viewport()->mapToGlobal(event->pos())); }
-        if(event->button() == Qt::LeftButton) {
-            QThread::msleep(250);
-            emit clicked(this->currentIndex()); } }
+            menu_middle->popup(this->viewport()->mapToGlobal(event->pos())); } }
 }
 
-//void Classeurs_treeView::mousePressEvent( QMouseEvent * event ) {
-//    if(event->button() == Qt::LeftButton) {
-//        QModelIndex idx = this->indexAt(event->pos());
-//        int cursor_pos_X = event->pos().rx();
-//        if (idx.isValid()) {
-//            emit clicked(this->currentIndex());
-//            int limit_L = setLimit(idx);
-//            if(cursor_pos_X >= limit_L &&
-//               cursor_pos_X <= limit_L + 21)
-//                this->setExpanded(idx, !(this->isExpanded(idx)));
-//            this->setCurrentIndex(idx); } }
-//}
+void Classeurs_treeView::mousePressEvent( QMouseEvent * event ) {
+    if(event->button() == Qt::LeftButton) {
+        QModelIndex idx = this->indexAt(event->pos());
+        int cursor_pos_X = event->pos().rx();
+        if (idx.isValid()) {
+            emit clicked(this->currentIndex());
+            int limit_L = setLimit(idx);
+            if(cursor_pos_X >= limit_L &&
+               cursor_pos_X <= limit_L + 21)
+                this->setExpanded(idx, !(this->isExpanded(idx)));
+            this->setCurrentIndex(idx); } }
+}
 
 int Classeurs_treeView::setLimit(QModelIndex index) {
     int limit(0);

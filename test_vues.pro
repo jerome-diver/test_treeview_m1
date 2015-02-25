@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,4 +33,4 @@ HEADERS  += mainwindow.h\
 FORMS    += mainwindow.ui \
         add_classeur_files.ui
 
-include(../modeltest5/modeltest.pri)
+include(../modeltest/modeltest.pri)

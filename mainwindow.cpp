@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "modeltest.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    qDebug("go");
     QSqlDatabase database =  QSqlDatabase::addDatabase("QPSQL");
     database.setDatabaseName("recorder");
     database.setHostName("localhost");
@@ -25,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->classeurs->hideColumn(3);
     ui->classeurs->hideColumn(4);
     ui->classeurs->setSortingEnabled(true);
-    ui->classeurs->setSelectionMode(QAbstractItemView::SingleSelection);
  //   QObject::connect(ui->classeurs,
  //                    SIGNAL(clicked(QModelIndex)),
  //                    this,
@@ -42,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(add_child_classeur(QModelIndex)),
                      this,
                      SLOT(on_classeurs_add_child(QModelIndex)));
-//    new ModelTest(classeurs_model, this);
+    new ModelTest(classeurs_model, this);
 }
 
 MainWindow::~MainWindow()

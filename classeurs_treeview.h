@@ -41,7 +41,7 @@ protected:
 
 protected slots:
     void mouseReleaseEvent ( QMouseEvent * event );
-  //  void mousePressEvent( QMouseEvent * event );
+    void mousePressEvent( QMouseEvent * event );
 
 signals:
     void clicked(QModelIndex);
